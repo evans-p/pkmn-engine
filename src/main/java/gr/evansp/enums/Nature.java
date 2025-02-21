@@ -1,4 +1,4 @@
-package gr.evansp;
+package gr.evansp.enums;
 
 /**
  * Enum Representing Pokemon natures.
