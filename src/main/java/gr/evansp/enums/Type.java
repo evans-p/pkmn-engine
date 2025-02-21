@@ -1,0 +1,23 @@
+package gr.evansp.enums;
+
+public enum Type {
+	NORMAL,
+	FIRE,
+	FIGHTING,
+	WATER,
+	FLYING,
+	GRASS,
+	POISON,
+	GROUND,
+	ELECTRIC,
+	PSYCHIC,
+	ROCK,
+	ICE,
+	BUG,
+	DRAGON,
+	GHOST,
+	DARK,
+	STEEL,
+	FAIRY,
+	UNKNOWN
+}
