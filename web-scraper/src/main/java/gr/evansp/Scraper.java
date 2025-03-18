@@ -12,14 +12,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-
+/**
+ * Scraper for scraping pokemon names from <b>pokemonshowdown.com</b> and storing them to a file.
+ * Next step is to use the data of the pokemon names, to scrape the pokemon's data.
+ */
 public class Scraper {
 	public static void main(String[] args) throws InterruptedException {
 		readPokemonNames();
 	}
 
+	/**
+	 * Scrapes all pokemon names from <b>pokemonshowdown.com</b> and stores them to a file.
+	 *
+	 * @throws InterruptedException
+	 * 		InterruptedException.
+	 */
 	private static void readPokemonNames() throws InterruptedException {
-		List<String> pokemonnames = new ArrayList<>(2000);
+		List<String> pokemonNames = new ArrayList<>(2000);
 		WebDriver driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
@@ -30,27 +39,45 @@ public class Scraper {
 		List<WebElement> elements = driver.findElements(By.className("pokemonnamecol"));
 		for (WebElement element : elements) {
 			if (isValidName(element.getText())) {
-				pokemonnames.add(element.getText());
+				pokemonNames.add(element.getText());
 			}
 		}
 
 		driver.quit();
-
-		writeToFile(pokemonnames);
+		writeToFile(pokemonNames, "web-scraper/src/main/resources/pokemon-names.txt");
 	}
 
-
+	/**
+	 * Filtering method, to remove invalid pokemon names. Filters following the rules below:
+	 * <ul>
+	 *     <li>If pokemon name contains the word 'mega', remove it</li>
+	 *     <li>If pokemon name contains the word 'gmax', remove it</li>
+	 *     <li>If pokemon name contains the word 'totem', remove it</li>
+	 * </ul>
+	 *
+	 * @param name
+	 * 		name
+	 * @return if the name is valid or not.
+	 */
 	private static boolean isValidName(String name) {
 		return !name.toLowerCase().contains("mega") &&
-		       !name.toLowerCase().contains("gmax") &&
-		       !name.toLowerCase().contains("totem");
+				       !name.toLowerCase().contains("gmax") &&
+				       !name.toLowerCase().contains("totem");
 	}
 
-	private static void writeToFile(List<String> names) {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter("web-scraper/src/main/resources/pokemon-names.txt"))) {
+	/**
+	 * Writes a list of strings to a file. Each string is written to a new line.
+	 *
+	 * @param names
+	 * 		the list of strings
+	 * @param fileName
+	 * 		the file name
+	 */
+	private static void writeToFile(List<String> names, String fileName) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
 			for (String item : names) {
 				writer.write(item);
-				writer.newLine(); // Add a new line after each item
+				writer.newLine();
 			}
 			System.out.println("List written to file successfully!");
 
