@@ -16,7 +16,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  * Scraper for scraping pokemon names from <b>pokemonshowdown.com</b> and storing them to a JSON file.
  * Next step is to use the data of the pokemon names, to scrape the pokemon's data.
  */
-public class Scraper {
+public class PokemonNameScraper {
     public static void main(String[] args) throws InterruptedException {
         readPokemonNames();
     }
