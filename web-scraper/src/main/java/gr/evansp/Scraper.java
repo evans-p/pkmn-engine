@@ -10,7 +10,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Scraper for scraping pokemon names from <b>pokemonshowdown.com</b> and storing them to a file.
@@ -29,7 +29,7 @@ public class Scraper {
 	 */
 	private static void readPokemonNames() throws InterruptedException {
 		List<String> pokemonNames = new ArrayList<>(2000);
-		WebDriver driver = new ChromeDriver();
+		WebDriver driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
 		driver.get("https://dex.pokemonshowdown.com/pokemon/");
